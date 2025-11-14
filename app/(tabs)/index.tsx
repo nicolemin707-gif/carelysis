@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
+import { router } from "expo-router";
 
 export default function Index() {
   return (
@@ -10,6 +11,7 @@ export default function Index() {
       }}
     >
       <Text>Welcome to your Health Companion!</Text>
+      <Button title="Go to My Vitals" onPress={() => router.push('/vitals')} />
     </View>
   );
 }
