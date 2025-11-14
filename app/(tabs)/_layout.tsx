@@ -1,23 +1,9 @@
-import { Tabs } from "expo-router";
-import { MaterialIcons } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
+import { Tabs } from 'expo-router';
 
-export default function AppLayout() {
+export default function TabsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: COLORS.primary,
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
+    <Tabs>
+      <Tabs.Screen name="home" />
     </Tabs>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { router } from "expo-router";
 import PrimaryButton from "../../components/PrimaryButton";
-import { COLORS, FONT_FAMILY } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const WelcomeScreen = () => {
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   title: {
-    fontFamily: FONT_FAMILY.display,
     fontSize: 28,
     fontWeight: "bold",
     color: COLORS.textSlate900,
@@ -43,7 +42,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   subtitle: {
-    fontFamily: FONT_FAMILY.display,
     fontSize: 16,
     color: COLORS.textSlate600,
     marginTop: 12,
