@@ -1,12 +1,7 @@
-import { Stack, useRouter, useSegments } from "expo-router";
-import { useFonts, Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold } from "@expo-google-fonts/manrope";
-import { OnboardingProvider } from "../context/OnboardingContext";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../constants/firebaseConfig";
-
-SplashScreen.preventAutoHideAsync();
+import { useEffect } from 'react';
+import { SplashScreen, Stack } from 'expo-router';
+import { auth } from '../utils/firebase';
+import { router } from 'expo-router';
 
 function AuthLayout() {
     const segments = useSegments();
@@ -40,26 +35,26 @@ function AuthLayout() {
 }
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
-    Manrope_400Regular,
-    Manrope_500Medium,
-    Manrope_600SemiBold,
-    Manrope_700Bold,
-  });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        router.replace('/(tabs)/home');
+      } else {
+        router.replace('/(auth)/sign-in');
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
+    SplashScreen.hideAsync();
+  }, []);
 
   return (
-    <OnboardingProvider>
-      <AuthLayout />
-    </OnboardingProvider>
+    <Stack>
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }
